@@ -1,0 +1,43 @@
+<app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+<div *ngIf="isLoaded">
+    <table mat-table [dataSource]="modelData" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.modelName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-spinner *ngIf="element.status=='TRAINING' || element.status=='NEW'" [diameter]="25"></mat-spinner>
+                <mat-icon *ngIf="element.status == 'DONE'" class="statusIconDone">done</mat-icon>
+                <mat-icon *ngIf="element.status == 'ERROR'" class="statusIconError" matTooltip="{{element.error.message}}">warning
+                </mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stats">
+            <th mat-header-cell *matHeaderCellDef> Stats </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="accent" (click)="viewMetadata(element)">
+                    <mat-icon>pageview</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="warn" (click)="delete(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<div align="end">
+    <mat-paginator #paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>

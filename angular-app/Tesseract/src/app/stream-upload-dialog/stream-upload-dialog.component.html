@@ -1,0 +1,52 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Select Stream Type</ng-template>
+    <div>
+      <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+      <mat-form-field *ngIf="isLoaded">
+        <mat-select placeholder="Select Source" [(ngModel)]="selectedStreamType">
+          <mat-option *ngFor="let source of streamTypes" [value]="source">
+            {{ source }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext [disabled]="selectedStreamType == null">Next</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Configure Stream</ng-template>
+    <div>
+      <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+      <app-configration-property-editor #streamConfigPropertyEditor style="padding: 6px 20px 0px 20px" [configKeys]="getStreamConfigs()"
+        class="fillParent">
+      </app-configration-property-editor>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext [disabled]="!isStreamConfigPropertyEntered()" (click)="saveStream()">Save</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <div>
+      <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+      <div *ngIf="isLoaded && errorMessage==null">
+        <mat-icon class="statusIconDone">done</mat-icon>
+        <div style="text-align: center">
+          Stream Configration saved successfully
+        </div>
+        <h1 class="mat-display-1"></h1>
+      </div>
+      <div *ngIf="isLoaded && errorMessage!=null">
+        <mat-icon class="statusIconError">clear</mat-icon>
+        <div style="text-align: center">
+          Error occured while Saving Stream
+          <br/>{{errorMessage}}
+        </div>
+      </div>
+      <button mat-button [disabled]="!isLoaded" (click)="close()">Close</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

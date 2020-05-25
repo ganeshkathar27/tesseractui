@@ -1,0 +1,23 @@
+table{
+	height:100%;
+	width:100%;
+	box-shadow: none;
+}
+
+th, td {
+    overflow: hidden;
+    width: 12.5%;
+    text-overflow: ellipsis;
+    padding: 5px;
+    text-align: center !important;
+}
+
+.statusIconDone {
+    fill: green;
+    color: green;
+}
+
+.statusIconError {
+    fill: red;
+    color: red;
+}

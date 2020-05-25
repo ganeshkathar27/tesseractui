@@ -1,0 +1,11 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~nouislider/distribute/nouislider.min.css";
+
+.mat-dialog-container {
+    overflow: visible !important;
+}
+
+.mat-dialog-content {
+    overflow: visible !important;
+}

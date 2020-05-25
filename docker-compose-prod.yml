@@ -1,0 +1,16 @@
+version: '3.7'
+
+networks: 
+  tesseract_default:
+    driver: bridge
+
+services:
+  angular-app:
+    container_name: tesseract-app
+    build:
+      context: ./angular-app
+      dockerfile: Dockerfile-prod
+    ports:
+      - '80:80'
+    networks:
+      - tesseract_default

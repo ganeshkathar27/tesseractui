@@ -1,0 +1,19 @@
+#analysisInfoSelector {
+    position: absolute;
+    left: 5px;
+}
+
+#keyField {
+    display: inline-block;
+    width: 90%;
+}
+
+.propertyFieldSelector {
+    display: inline-block;
+    width: 30%;
+    margin-right: 3%;
+}
+
+#uploadButton{
+    width: 10%;
+}

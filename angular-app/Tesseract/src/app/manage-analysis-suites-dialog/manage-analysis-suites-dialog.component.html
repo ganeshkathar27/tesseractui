@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>Analysis Suites</h1>
+
+<div mat-dialog-content>
+  <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+  <div *ngIf="isLoaded">
+    <table mat-table [dataSource]="analysisSuites" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="suiteName">
+        <th mat-header-cell *matHeaderCellDef> Suite Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.suiteName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataKeys">
+        <th mat-header-cell *matHeaderCellDef> Data Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataKeys.length}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="analysisType">
+        <th mat-header-cell *matHeaderCellDef> Analysis Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.analysisType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.status=='DONE'" class="statusIconDone">done</mat-icon>
+          <mat-icon *ngIf="element.status=='WARN'" class="statusIconWarn">warning</mat-icon>
+          <mat-icon *ngIf="element.status=='ERROR'" class="statusIconError">clear</mat-icon>
+          <mat-spinner *ngIf="element.status=='RUNNING' || element.status=='NEW'" [diameter]="25"></mat-spinner>
+          <mat-spinner *ngIf="" [diameter]="25"></mat-spinner>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="download">
+        <th mat-header-cell *matHeaderCellDef> Download </th>
+        <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+          <button *ngIf="element.status=='DONE' || element.status=='WARN'" mat-icon-button color="accent" (click)="downloadSuite(element)">
+            <mat-icon>cloud_download</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+          <button *ngIf="element.status=='DONE' || element.status=='WARN'" mat-icon-button color="warn" (click)="deleteSuite(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumns;"
+        (click)="openAnalysisInSuite(row.suiteName)"></tr>
+    </table>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="openAddAnalysisSuiteDialog()">New</button>
+  <button mat-button (click)="fetchAnalysisSuites()">Refresh</button>
+  <button mat-button cdkFocusInitial mat-dialog-close>Close</button>
+</div>

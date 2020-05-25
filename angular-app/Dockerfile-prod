@@ -1,0 +1,13 @@
+FROM node:10.9 as base
+
+COPY Tesseract /Tesseract
+WORKDIR /Tesseract
+RUN npm install 
+RUN $(npm bin)/ng build --prod
+
+FROM nginx:1.17.4
+
+COPY Resources/default.conf /etc/nginx/conf.d/
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=base /Tesseract/dist /usr/share/nginx/html/

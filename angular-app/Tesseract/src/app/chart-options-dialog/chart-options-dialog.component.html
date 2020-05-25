@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Chart Options</h1>
+<div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let group of Object.keys(options)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{group}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field *ngFor="let option of options[group]" class="selector" style="padding: 0">
+        <input matInput placeholder="{{option.name}}" [(ngModel)]="option.value" class="selector"
+          style="padding: 0">
+      </mat-form-field>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

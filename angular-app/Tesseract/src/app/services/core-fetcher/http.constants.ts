@@ -1,0 +1,37 @@
+const baseUrl = "api"
+export const accessibleFeaturesUrl = baseUrl + "/accessiblefeatures";
+export const allSourceUrl = baseUrl + "/sources";
+export const allStreamConfigUrl = baseUrl + "/streamconfigs"
+export const timeSeriesDatakeysUrl = baseUrl + "/timeseriesdatakeys";
+export const streamkeysUrl = baseUrl + "/streamkeys";
+export const timeSeriesAnalysisInfosUrl = baseUrl + "/timeseriesanalysisinfos";
+export const predictiveAnalysisInfosUrl = baseUrl + "/predictiveanalysisinfos";
+export const streamSupportedanalysisInfosUrl = baseUrl + "/streamsupportedanalysisinfos";
+export const uploadDataUrl = baseUrl + "/uploaddata";
+export const uploadDataProgressUrl = baseUrl + "/uploaddataprogress";
+export const saveStreamUrl = baseUrl + "/savestream";
+export const dashboardUrl = baseUrl + "/dashboard";
+export const streamUrl = baseUrl + "/stream";
+export const dashboardsUrl = baseUrl + "/dashboards";
+export const runAnalysisUrl = baseUrl + "/runanalysis";
+export const trainModelUrl = baseUrl + "/trainmodel";
+export const runAnalysisSuiteUrl = baseUrl + "/runanalysissuite";
+export const analyzeStreamUrl = baseUrl + "/analyzestream";
+export const readStreamUrl = baseUrl + "/readstream";
+export const stopStreamUrl = baseUrl + "/stopstream";
+export const requiredAnalysisUrl = baseUrl + "/requiredconfigrations";
+export const getDataConfigurationUrl = baseUrl + "/generatedataconfiguration";
+export const fileUploadUrl = baseUrl + "/uploadfile";
+export const exportAnalysisUrl = baseUrl + "/exportanalysis";
+export const analysisSuiteCsvUrl = baseUrl + "/analysissuitecsv";
+export const allAnalysisSuitesUrl = baseUrl + "/analysissuites";
+export const analysisSuiteUrl = baseUrl + "/analysissuite";
+export const dataUrl = baseUrl + "/data";
+export const modelUrl = baseUrl + "/model";
+export const getAnalysisUrl = baseUrl + "/analysis";
+export const analysisSpecificationParam = "analysisSpecifications";
+export const dataInfoURL = baseUrl + "/datainfo";
+export const modelInfoURL = baseUrl + "/modelinfo";
+export const customColumnUrl = baseUrl + "/customcolumn"
+
+

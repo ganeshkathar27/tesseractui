@@ -1,0 +1,15 @@
+.statusIconDone {
+    fill: green;
+    color: green;
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+}
+
+.statusIconError {
+    fill: red;
+    color: red;
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+}

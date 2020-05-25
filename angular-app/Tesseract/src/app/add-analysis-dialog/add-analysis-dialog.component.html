@@ -1,0 +1,42 @@
+<h1 mat-dialog-title *ngIf="componentsLoaded >= 2">Please select required Analysis</h1>
+<div *ngIf="componentsLoaded < 2">
+  <app-progress-indicator></app-progress-indicator>
+</div>
+
+<div *ngIf="componentsLoaded >= 2">
+  <div mat-dialog-content>
+    <div *ngIf="errorMessage.length > 0">
+      <mat-error>{{errorMessage}}</mat-error>
+      <br />
+    </div>
+    <div>
+      <app-selector-wrapper id="keyField" [onSelectCallback]="onDataKeySelect" [placeholder]="'Select Data Key'" [keys]="keys">
+      </app-selector-wrapper>
+      <button mat-icon-button id="uploadButton" color="accent" (click)="openUploadDialog()">
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+    </div>
+    <br />
+    <div *ngIf="selectedDataKey && !isStreamSource()">
+      <app-selector-wrapper class="propertyFieldSelector" [onSelectCallback]="onIndexSelect" [placeholder]="'Select Index'" [keys]="indexes">
+      </app-selector-wrapper>
+      <app-selector-wrapper class="propertyFieldSelector" [onSelectCallback]="onDataPeriodSelect" [placeholder]="'Select Data Period'" [keys]="periods">
+      </app-selector-wrapper>
+      <app-selector-wrapper class="propertyFieldSelector" [onSelectCallback]="onTargetSelect" [placeholder]="'Select Target'" [keys]="targets">
+      </app-selector-wrapper>
+    </div>
+    <br />
+    
+    <mat-grid-list cols="2" rowHeight="35px">
+      <mat-grid-tile *ngFor="let info of analysisInfos">
+        <div id="analysisInfoSelector">
+          <mat-checkbox [(ngModel)]="info[1]">{{info[0]}}</mat-checkbox>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button *ngIf="componentsLoaded >= 2" (click)="addAnalysis()">Add</button>
+    <button mat-button mat-dialog-close *ngIf="componentsLoaded >= 2">Cancel</button>
+  </div>
+</div>

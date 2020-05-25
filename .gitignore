@@ -1,0 +1,8 @@
+.DS_Store
+.vscode/
+angular-app/.DS_Store
+angular-app/Tesseract/src/environments/firebase-api-key.ts
+deployment/Resources/firebase-api-key.ts
+deployment/Resources/git-ssh-id_rsa
+deployment/Resources/git-ssh-id_rsa.pub
+deployment/Resources/Tesseract.pem

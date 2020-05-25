@@ -1,0 +1,261 @@
+<div *ngIf="accessibleFeatures">
+  <div class="category" *ngIf="hasFeature('MANAGE_DATA')" (click)="toggleDataMenuState()">Data</div>
+  <div [@slideInOut]="dataMenuState">
+    <div class="scene" *ngIf="hasFeature('MANAGE_DATA')" (click)="openUploadDataDialog()" matTooltip="Upload Data"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">cloud_upload</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">cloud_upload</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('PREDICTIVE_ANALYTICS')" (click)="openTrainModelDialog()" matTooltip="Train Model"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">group_work</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">group_work</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+  </div>
+
+  <div class="category" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS') || hasFeature('TIME_SERIES')"
+    (click)="toggleChartMenuState()">Charts</div>
+  <div [@slideInOut]="chartsMenuState">
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="openBasicChartDialog('bar')"
+      matTooltip="Bar Chart" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">bar_chart</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">bar_chart</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="openBasicChartDialog('pie')"
+      matTooltip="Pie Chart" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">pie_chart</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">pie_chart</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="openBasicChartDialog('line')"
+      matTooltip="Line Chart" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">show_chart</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">show_chart</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="openDataValueWidgetDialog()"
+      matTooltip="Data Value" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">highlight</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">highlight</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="openDialWidgetDialog()"
+      matTooltip="Dial Chart" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">speed</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">speed</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="openDataTableWidgetDialog()"
+      matTooltip="Data Table" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">table_chart</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">table_chart</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="openGeoMapWidgetDialog()"
+      matTooltip="Geo Map" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">map</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">map</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('TIME_SERIES')" (click)="openDataAnalysisDialog()"
+      matTooltip="Time Series Analysis" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">device_hub</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">device_hub</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="addSliceWidget()" matTooltip="Slice"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">zoom_in</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">zoom_in</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="addStaticTextWidget()" matTooltip="Static Text"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">font_download</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">font_download</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+  </div>
+
+  <div class="category" *ngIf="hasFeature('STREAMING')" (click)="toggleStreamMenuState()">Streams</div>
+  <div [@slideInOut]="streamMenuState">
+    <div class=" scene" *ngIf="hasFeature('STREAMING')" (click)="openAddStreamDialog()" matTooltip="Upload Stream"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">trending_flat</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">trending_flat</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('STREAMING')" (click)="openStreamAnalysisDialog()" matTooltip="Stream Analysis"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">trending_up</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">trending_up</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+  </div>
+
+  <div class="category" (click)="toggleMiscMenuState()">Manage</div>
+  <div [@slideInOut]="miscMenuState">
+    <div class="scene" *ngIf="hasFeature('MANAGE_DATA')" (click)="openManageDataDialog()" matTooltip="Manage Data"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">work</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">work</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="addNewDashboard()"
+      matTooltip="New Dashboard" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">open_in_new</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">open_in_new</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="saveDashboard()" matTooltip="Save Dashboard"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">save</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">save</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('DESCRIPTIVE_ANALYTICS')" (click)="loadDashboard()" matTooltip="Load Dashboard"
+      matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">dashboard</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">dashboard</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+
+    <div class="scene" *ngIf="hasFeature('ANALYSIS_SUITE')" (click)="openManageAnalysisSuitesDialog()"
+      matTooltip="Analysis Suite" matTooltipPosition="right" matTooltipClass="customTooltip">
+      <div class="box">
+        <div class="front face">
+          <mat-icon class="icon">repeat</mat-icon>
+        </div>
+        <div class="right face">
+          <mat-icon class="icon">repeat</mat-icon>
+        </div>
+      </div>
+    </div>
+    <br class="spacer">
+  </div>
+</div>

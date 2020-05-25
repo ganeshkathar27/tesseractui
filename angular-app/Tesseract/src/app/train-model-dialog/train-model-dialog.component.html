@@ -1,0 +1,68 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step>
+        <ng-template matStepLabel>Select</ng-template>
+        <div>
+            <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+            <div *ngIf="isLoaded">
+                <mat-form-field class="modelParamSelector">
+                    <input matInput placeholder="Enter Model Name" [(ngModel)]="modelName" class="fillParent">
+                </mat-form-field>
+                <mat-form-field class="modelParamSelector">
+                    <mat-select placeholder="Select Data Key" [(ngModel)]="selectedDataKey">
+                        <mat-option *ngFor="let dataKey of dataKeys" [value]="dataKey">
+                            {{ dataKey }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="modelParamSelector">
+                    <mat-select placeholder="Select Analysis" [(ngModel)]="selectedAnalysis">
+                        <mat-option *ngFor="let name of analysis" [value]="name">
+                            {{ name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button matStepperNext (click)="getRequiredAnalysisConfigs()"
+                    [disabled]="modelName == '' || modelName == null || selectedDataKey == null || selectedAnalysis == null">Next</button>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Configure</ng-template>
+        <div style="overflow: scroll">
+            <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+            <app-configration-property-editor #modelConfigPropertyEditor style="padding: 6px 20px 0px 20px"
+                [configKeys]="modelConfigKeys">
+            </app-configration-property-editor>
+        </div>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext [disabled]="!isModelConfigPropertyEntered()"
+                (click)="startTrainModel()">Train</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div>
+            <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+            <div *ngIf="isLoaded && errorMessage==null">
+                <mat-icon class="statusIconDone">done</mat-icon>
+                <div style="text-align: center">
+                    Model submitted for training.
+                </div>
+                <h1 class="mat-display-1"></h1>
+            </div>
+            <div *ngIf="isLoaded && errorMessage!=null">
+                <mat-icon class="statusIconError">clear</mat-icon>
+                <div style="text-align: center">
+                    Error occured while training model
+                    <br />{{errorMessage}}
+                </div>
+            </div>
+            <button mat-button *ngIf="errorMessage" matStepperPrevious>Back</button>
+            <button mat-button mat-dialog-close [disabled]="!isLoaded">Close</button>
+        </div>
+    </mat-step>
+
+</mat-horizontal-stepper>

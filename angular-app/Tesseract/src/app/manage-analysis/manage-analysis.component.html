@@ -1,0 +1,64 @@
+<h1 mat-dialog-title *ngIf="isLoaded">Analysis for Suite : {{suiteName}} | Analysis Type : {{analysisType}}
+</h1>
+
+<div mat-dialog-content>
+  <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+  <div *ngIf="isLoaded">
+    <table mat-table [dataSource]="analysis" class="mat-elevation-z8" matSort>
+
+      <ng-container matColumnDef="analysisName">
+        <th mat-header-cell *matHeaderCellDef> Analysis Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.analysisName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataKey">
+        <th mat-header-cell *matHeaderCellDef> Data Key </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataKey.key}} </td>
+        <td mat-footer-cell *matFooterCellDef style="font-weight: bold"> Average </td>
+      </ng-container>
+
+      <ng-container *ngFor="let header of metadataHeadersKeys() " matColumnDef="{{header}}">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{header}} </th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="!element.error">
+            {{element.metadata.elements[metadataHeadersIndexes[header]].value | number : '1.2-2'}}
+          </div>
+        </td>
+        <td mat-footer-cell *matFooterCellDef style="font-weight: bold"> {{getAverage(header) | number : '1.2-2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="analysisType">
+        <th mat-header-cell *matHeaderCellDef> Analysis Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.analysisType}} </td>
+        <td mat-footer-cell *matFooterCellDef style="font-weight: bold">  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="!element.error" class="statusIconDone">done</mat-icon>
+          <mat-icon *ngIf="element.error" class="statusIconError" matTooltip="{{element.error}}">warning</mat-icon>
+        </td>
+        <td mat-footer-cell *matFooterCellDef style="font-weight: bold">  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="addToCanvas">
+        <th mat-header-cell *matHeaderCellDef> Add to Canvas </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="addToCanvas(element)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef style="font-weight: bold">  </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <mat-paginator #paginator [pageSize]="6" showFirstLastButtons></mat-paginator>
+  <button mat-button cdkFocusInitial mat-dialog-close>Close</button>
+</div>

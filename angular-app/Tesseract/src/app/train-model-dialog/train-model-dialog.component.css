@@ -1,0 +1,21 @@
+.modelParamSelector {
+    width: 25%;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.statusIconDone {
+    fill: green;
+    color: green;
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+}
+
+.statusIconError {
+    fill: red;
+    color: red;
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+}

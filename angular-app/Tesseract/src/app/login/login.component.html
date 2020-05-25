@@ -1,0 +1,12 @@
+<div class="fillParent">
+    <div class="headingContainer">
+        <div class="heading"></div>
+    </div>
+</div>
+<div id="loginDialogOverlay">
+    <app-progress-indicator *ngIf="!loadedStatus"></app-progress-indicator>
+    <ngx-auth-firebaseui id="loginDialog" [providers]="['google']" [guestEnabled]="false"
+        verifyEmailGoBackText="Refresh" goBackURL="/canvas_tiger" tosUrl="../../assets/terms-and-condition.html"
+        (selectedTabChange)="onTabSelect($event)" (onSuccess)="onSuccess($event)" (onError)="handleError($event)">
+    </ngx-auth-firebaseui>
+</div>

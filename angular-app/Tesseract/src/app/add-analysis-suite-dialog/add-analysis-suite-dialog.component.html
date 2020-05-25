@@ -1,0 +1,79 @@
+<mat-horizontal-stepper>
+  <mat-step>
+    <ng-template matStepLabel>Enter Suite Name</ng-template>
+    <div>
+      <app-progress-indicator *ngIf="componentsLoaded < 2"></app-progress-indicator>
+      <mat-form-field *ngIf="componentsLoaded >= 2">
+        <input matInput placeholder="Suite Name" [(ngModel)]="suiteName">
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-button matStepperNext [disabled]="!suiteName">Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Select Data Key and Analysis</ng-template>
+    <div *ngIf="componentsLoaded >= 2">
+      <div style="padding: 25px">
+        <app-selector-wrapper id="keyField" #dataKeySelector [placeholder]="'Select Data Key'" [keys]="keys"
+          [allowMultiple]="true">
+        </app-selector-wrapper>
+        <br />
+
+        <mat-radio-group [(ngModel)]="selectedAnalysis">
+          <mat-grid-list cols="2" rowHeight="35px">
+            <mat-grid-tile *ngFor="let info of analysisInfos">
+              <mat-radio-button [value]="info" style="width: 100%; margin-left: 20px;">
+                {{info}}
+              </mat-radio-button>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-radio-group>
+
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext [disabled]="!isDataKeySelected() || !selectedAnalysis"
+          (click)="fetchConfigs()">Next</button>
+      </div>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Enter Configration</ng-template>
+    <div style="padding: 25px">
+      <app-progress-indicator *ngIf="!selectedAnalysisConfigKeys"></app-progress-indicator>
+      <app-configration-property-editor *ngIf="selectedAnalysisConfigKeys" #configPropertyEditor
+        style="padding: 6px 20px 0px 20px;  overflow: auto;" [configKeys]="selectedAnalysisConfigKeys"
+        class="fillParent">
+      </app-configration-property-editor>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="runAnalysisSuite()">Start</button>
+      </div>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <div>
+      <app-progress-indicator *ngIf="!isLoaded"></app-progress-indicator>
+      <div *ngIf="isLoaded && errorMessage==null">
+        <mat-icon class="statusIconDone">done</mat-icon>
+        <div style="text-align: center">
+          Analysis Suite Submitted successfully
+        </div>
+        <h1 class="mat-display-1"></h1>
+      </div>
+      <div *ngIf="isLoaded && errorMessage!=null">
+        <mat-icon class="statusIconError">clear</mat-icon>
+        <div style="text-align: center">
+          Error occured while submitting analysis suite
+          <br />{{errorMessage}}
+        </div>
+      </div>
+      <button mat-button mat-dialog-close [disabled]="!isLoaded">Close</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
