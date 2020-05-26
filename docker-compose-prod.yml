@@ -3,6 +3,7 @@ version: '3.7'
 networks: 
   tesseract_default:
     driver: bridge
+    name: tesseract_default
 
 services:
   angular-app:
