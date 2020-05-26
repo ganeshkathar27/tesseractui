@@ -12,6 +12,9 @@
 * Run: npm install 
 * Run: ng serve --host 0.0.0.0 --proxy-config proxy.config.json
 
+### Note
+* If you want to point to a server deployed locally, use command: ng serve --host 0.0.0.0 --proxy-config local-proxy.config.json
+
 ## Container Details
 * Angular App
   * Angular app running with ng serve and a proxy config
